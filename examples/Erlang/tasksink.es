@@ -30,7 +30,7 @@ main(_) ->
 process_confirmations(_Receiver, 0) -> ok;
 process_confirmations(Receiver, N) when N > 0 ->
     {ok, _} = erlzmq:recv(Receiver),
-    case N - 1 rem 10 of
+    case (N - 1) rem 10 of
         0 -> io:format(":");
         _ -> io:format(".")
     end,

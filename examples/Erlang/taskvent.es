@@ -34,6 +34,6 @@ main(_) ->
 
 send_tasks(_Sender, 0, TotalCost) -> TotalCost;
 send_tasks(Sender, N, TotalCost) when N > 0 ->
-    Workload = random:uniform(100) + 1,
+    Workload = random:uniform(100),
     ok = erlzmq:send(Sender, list_to_binary(integer_to_list(Workload))),
     send_tasks(Sender, N - 1, TotalCost + Workload).
