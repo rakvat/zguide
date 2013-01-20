@@ -10,7 +10,7 @@ main(_) ->
 
     %% Socket to talk to clients
     {ok, Responder} = erlzmq:socket(Context, rep),
-    ok = erlzmq:connect(Responder, "tcp://*:5560"),
+    ok = erlzmq:connect(Responder, "tcp://localhost:5560"),
 
     loop(Responder),
 

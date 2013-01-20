@@ -10,11 +10,11 @@ main(_) ->
 
     %% Socket to talk to server
     {ok, Requester} = erlzmq:socket(Context, req),
-    ok = erlzmq:connect(Requester, "tcp://*:5559"),
+    ok = erlzmq:connect(Requester, "tcp://localhost:5559"),
 
     lists:foreach(
       fun(Num) ->
-              erlzmq:send(Requester, <<"Hello">>),
+              ok = erlzmq:send(Requester, <<"Hello">>),
               {ok, Reply} = erlzmq:recv(Requester),
               io:format("Received reply ~b [~s]~n", [Num, Reply])
       end, lists:seq(1, 10)),
