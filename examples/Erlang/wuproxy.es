@@ -7,16 +7,19 @@ main(_) ->
     {ok, Context} = erlzmq:context(),
 
     %% This is where the weather server sits
-    {ok, Frontend} = erlzmq:socket(Context, sub),
+    {ok, Frontend} = erlzmq:socket(Context, xsub),
     ok = erlzmq:connect(Frontend, "tcp://localhost:5556"),
 
     %% This is our public endpoint for subscribers
-    {ok, Backend} = erlzmq:socket(Context, pub),
+    {ok, Backend} = erlzmq:socket(Context, xpub),
     ok = erlzmq:bind(Backend, "tcp://*:8100"),
 
-    %% Subscribe on everything
-    ok = erlzmq:setsockopt(Frontend, subscribe, <<>>),
+    %% TODO: use device to encapsulate xpub-xsub 
 
+    %%  Pass the subscription upstream through the device.
+    {ok, Buff0} = erlzmq:recv(Backend),
+    ok = erlzmq:send(Frontend, Buff0),
+    
     %% Shunt messages out to our own subscribers
     loop(Frontend, Backend),
 
