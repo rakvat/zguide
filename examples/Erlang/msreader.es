@@ -29,12 +29,12 @@ loop(Receiver, Subscriber) ->
     %% We prioritize traffic from the task ventilator
     process_tasks(Receiver),
     process_weather(Subscriber),
-    timer:sleep(1000),
+    timer:sleep(1),     %% msec
     loop(Receiver, Subscriber).
 
 process_tasks(S) ->
     %% Process any waiting tasks
-    case erlzmq:recv(S, [noblock]) of
+    case erlzmq:recv(S, [dontwait]) of
         {error, eagain} -> ok;
         {ok, Msg} ->
             io:format("Procesing task: ~s~n", [Msg]),
@@ -43,7 +43,7 @@ process_tasks(S) ->
 
 process_weather(S) ->
     %% Process any waiting weather updates
-    case erlzmq:recv(S, [noblock]) of
+    case erlzmq:recv(S, [dontwait]) of
         {error, eagain} -> ok;
         {ok, Msg} ->
             io:format("Processing weather update: ~s~n", [Msg]),
