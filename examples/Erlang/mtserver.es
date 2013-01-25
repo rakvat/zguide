@@ -22,18 +22,20 @@ main(_) ->
     {ok, Context} = erlzmq:context(),
 
     %% Socket to talk to clients
-    {ok, Clients} = erlzmq:socket(Context, [router, {active, true}]),
+    {ok, Clients} = erlzmq:socket(Context, router),
     ok = erlzmq:bind(Clients, "tcp://*:5555"),
 
     %% Socket to talk to workers
-    {ok, Workers} = erlzmq:socket(Context, [dealer, {active, true}]),
+    {ok, Workers} = erlzmq:socket(Context, dealer),
     ok = erlzmq:bind(Workers, "inproc://workers"),
 
     %% Start worker processes
     start_workers(Context, 5),
 
     %% Connect work threads to client threads via a queue
-    erlzmq_device:queue(Clients, Workers),
+    erlzmq_proxy:create(Clients, Workers),
+    %% use this version for active sockets:
+    %%erlzmq_device:queue(Clients, Workers),
 
     %% We never get here but cleanup anyhow
     ok = erlzmq:close(Clients),

@@ -4,6 +4,32 @@ To run an example provide the path to the `ERLZMQ` NIF wrapper and execute a `EX
 
     $ ERL_LIBS=/path/to/ERLZMQ ./EXAMPLE.es
 
+ERLZMQ NIF wrapper should currently be git://github.com/rakvat/erlzmq2.git
+
+
+
+* Examples in order of appearance in zguide
+
+1 hwserver, hwclient
+1 wuserver, wuclient
+1 taskvent, taskwork, tasksink
+2 msreader (use with wuserver and taskvent)
+2 mspoller (use with wuserver and taskvent)
+2 rrclient, rrworker, rrbroker
+2 msgqueue (use with rrworker and rrclient)
+2 wuproxy (use with wuserver and wuclient (with modified ip/port))
+2 taskwork2, tasksink2 (use with taskvent)
+2 interrupt
+
+2 mtserver
+(to be continued)
+
+asyncserv: replace noblock with dontwait
+
+
+
+
+
 * Examples in Erlang
 
 |-------------+--------------------|
