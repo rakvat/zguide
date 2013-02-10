@@ -20,8 +20,14 @@ ERLZMQ NIF wrapper should currently be git://github.com/rakvat/erlzmq2.git
 2 wuproxy (use with wuserver and wuclient (with modified ip/port))
 2 taskwork2, tasksink2 (use with taskvent)
 2 interrupt
+2 mtserver (use with hwclient)
+2 mtrelay
+2 syncpub, syncsub (does not work for me (message loss))
+2 psenvpub, psenvsub
+3 identity
+3 rtreq
 
-2 mtserver
+
 (to be continued)
 
 asyncserv: replace noblock with dontwait
