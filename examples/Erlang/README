@@ -27,6 +27,7 @@ ERLZMQ NIF wrapper should currently be git://github.com/rakvat/erlzmq2.git
 3 identity
 3 rtreq
 3 rtdealer
+3 lbbroker
 
 
 (to be continued)
@@ -40,7 +41,7 @@ asyncserv: replace noblock with dontwait
 * Examples in Erlang
 
 |-------------+--------------------|
-| Example     | 0MQ 2.1.7          |
+| Example     | 0MQ 3.1.0          |
 |-------------+--------------------|
 | asyncsrv    | yes                |
 | durapub     | yes                |
@@ -50,6 +51,7 @@ asyncserv: replace noblock with dontwait
 | hwserver    | yes                |
 | identity    | yes                |
 | interrupt   | yes (Erlang equiv) |
+| lbbroker    | yes                |
 | lruqueue    | yes                |
 | msgqueue    | yes                |
 | mspoller    | yes                |
